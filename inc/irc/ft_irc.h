@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 16:42:38 by aollivie          #+#    #+#             */
-/*   Updated: 2017/11/29 03:08:26 by alex             ###   ########.fr       */
+/*   Updated: 2017/11/29 06:25:29 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@
 # define FD_SERV	1
 
 # define MAX_LEN_CMD 			42
-# define MAX_LEN_CHANEL_NAME	9
-# define MAX_LEN_LOGIN_NAME 	9
+
 
 # define Xv(err,res,str)	(x_void(err,res,str,__FILE__,__LINE__))
 # define X(err,res,str)		(x_int(err,res,str,__FILE__,__LINE__))
@@ -61,19 +60,19 @@
 // 	char		*end_data;
 // }	t_buf;
 
-typedef struct	s_chanel
-{
-	char			*name;
-	int				*fds;
-	int				fdsize;
-}	t_chanel;
-
-typedef struct	s_chanels
-{
-	int			nb_chanel;
-	int			nb_chanel_active;
-	t_chanel	*l_chanel;
-}	t_chanels;
+// typedef struct	s_chanel
+// {
+// 	char			*name;
+// 	int				*fds;
+// 	int				fdsize;
+// }	t_chanel;
+//
+// typedef struct	s_chanels
+// {
+// 	int			nb_chanel;
+// 	int			nb_chanel_active;
+// 	t_chanel	*l_chanel;
+// }	t_chanels;
 
 // typedef struct	s_fd
 // {

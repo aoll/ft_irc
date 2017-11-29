@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:47:21 by alex              #+#    #+#             */
-/*   Updated: 2017/11/29 03:34:02 by alex             ###   ########.fr       */
+/*   Updated: 2017/11/29 05:33:44 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ void	init_fd(t_env *e)
 		if (e->fds[i].type != FD_FREE)
 		{
 			FD_SET(i, &e->fd_read);
-			// if (strlen(e->fds[i].buf_write) > 0)
-			// 	{
-			// 		FD_SET(i, &e->fd_write);
-			// 	}
+			if (e->fds[i].type == FD_CLIENT)
+			{
+				if (e->fds[i].buf_write->size > 0)
+				{
+					FD_SET(i, &e->fd_write);
+				}
+			}
 			e->max = MAX(e->max, i);
 		}
 		i++;
@@ -61,7 +64,7 @@ int	server_listen(t_env *e)
 	{
 		init_fd(e);
 		printf("%s\n", "start loop");
-		e->r = select(e->max + 1, &e->fd_read, NULL, NULL, NULL);
+		e->r = select(e->max + 1, &e->fd_read, &e->fd_write, NULL, NULL);
 		if (!e->r)
 			continue ;
 		if (e->r < 0)

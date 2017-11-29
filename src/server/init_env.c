@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:12:04 by alex              #+#    #+#             */
-/*   Updated: 2017/11/29 03:30:54 by alex             ###   ########.fr       */
+/*   Updated: 2017/11/29 08:26:09 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ static void		new_client(t_env *e, int cs)
 		printf("%s\n", "ERROR: new_client");
 		exit(EXIT_FAILURE);
 	}
+	if (!(e->fds[cs].buf_write = ft_buf_new(BUF_SIZE)))
+	{
+		printf("%s\n", "ERROR: new_client");
+		exit(EXIT_FAILURE);
+	}
+	ft_bzero(e->fds[cs].name, MAX_LEN_LOGIN_NAME);
+	ft_strcpy(e->fds[cs].name, GUEST);
+	ft_strcpy(e->fds[cs].name + ft_strlen(GUEST), ft_itoa(cs));
+	ft_bzero(e->fds[cs].channel, MAX_LEN_CHANEL_NAME);
 }
 
 static void		srv_accept(t_env *e, int s)
@@ -61,6 +70,15 @@ static int	init_env_fd(t_env *e)
 	return (EXIT_SUCCESS);
 }
 
+int			init_env_channel(t_env *e)
+{
+	if (!(e->channels = ft_chanels_init(NB_MAX_CHANNEL)))
+	{
+		return (EXIT_FAILLURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
 int			init_env(t_env *e, int port)
 {
 	int sock;
@@ -68,6 +86,11 @@ int			init_env(t_env *e, int port)
 	if (init_env_fd(e))
 	{
 		printf("%s\n", "ERROR: init env_fd");
+		return (EXIT_FAILLURE);
+	}
+	if (init_env_channel(e))
+	{
+		printf("%s\n", "ERROR: init_env_channel");
 		return (EXIT_FAILLURE);
 	}
 	if ((sock = create_server(port, e->maxfd)) < 0)

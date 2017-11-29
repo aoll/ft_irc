@@ -6,11 +6,19 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 03:54:07 by alex              #+#    #+#             */
-/*   Updated: 2017/11/29 04:17:04 by alex             ###   ########.fr       */
+/*   Updated: 2017/11/29 05:58:49 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
+
+void	ft_buf_clean(t_buf *buf_e)
+{
+	buf_e->size = 0;
+	buf_e->start_data = buf_e->start_buf;
+	buf_e->end_data = buf_e->start_buf;
+	return;
+}
 
 t_buf		*ft_buf_new(size_t size)
 {
@@ -19,6 +27,7 @@ t_buf		*ft_buf_new(size_t size)
 	if (!(buf_e = malloc(size + sizeof(*buf_e))))
 		return (NULL);
 
+	buf_e->size = 0;
 	buf_e->start_buf = (void *)buf_e + sizeof(*buf_e);
 	buf_e->end_buf = (void *)buf_e->start_buf + size;
 	buf_e->start_data = buf_e->start_buf;
@@ -30,6 +39,7 @@ static int	ft_buf_add_data_to_end(const char *s, size_t size, t_buf *buf_e)
 {
 	ft_strncpy(buf_e->end_data, s, size);
 	buf_e->end_data += size;
+	buf_e->size += size;
 	if (buf_e->end_data == buf_e->end_buf)
 		buf_e->end_data = buf_e->start_buf;
 	return (EXIT_SUCCESS);
@@ -49,6 +59,7 @@ static int	ft_buf_add_data_start_end(const char *s, size_t size, t_buf *buf_e)
 		ft_strncpy(buf_e->end_data, s, size_to_end_buf);
 		ft_strncpy(buf_e->start_buf, s, size_from_begin);
 		buf_e->end_data = buf_e->start_buf + size_from_begin;
+		buf_e->size += size;
 		return (EXIT_SUCCESS);
 	}
 	else
@@ -70,12 +81,12 @@ int			ft_buf_add_data(t_buf *buf_e, const char *s, size_t size)
 	return (ft_buf_add_data_to_end(s, size, buf_e));
 }
 
-int		ft_buf_get_data(t_buf *buf_e, char *dest, int full)
+int		ft_buf_get_data(t_buf *buf_e, char *dest)
 {
 	int	i;
 
 	i = 0;
-	if (full)
+	if (buf_e->size == (size_t)(buf_e->end_buf - buf_e->start_buf))
 	{
 		*dest = *buf_e->start_data;
 		dest++;
@@ -93,5 +104,6 @@ int		ft_buf_get_data(t_buf *buf_e, char *dest, int full)
 			buf_e->start_data = buf_e->start_buf;
 		i++;
 	}
+	buf_e->size = 0;
 	return (i);
 }

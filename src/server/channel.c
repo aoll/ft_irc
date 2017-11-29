@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chanel.c                                           :+:      :+:    :+:   */
+/*   channel.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:19:15 by alex              #+#    #+#             */
-/*   Updated: 2017/11/27 14:02:03 by alex             ###   ########.fr       */
+/*   Updated: 2017/11/29 08:37:13 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_irc.h"
+#include "server.h"
 
-int			ft_is_chanel_exist(t_chanels *cha, const char *name)
+int			ft_is_channel_exist(t_chanels *cha, const char *name)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ int			ft_is_chanel_exist(t_chanels *cha, const char *name)
 // 	int		j;
 // 	char	*s;
 //
-// 	if ((i = ft_is_chanel_exist(cha, name)) == -1)
+// 	if ((i = ft_is_channel_exist(cha, name)) == -1)
 // 		return (EXIT_FAILURE);
 // 	j = 0;
 // 	if (!(s = ft_strnew(cha->l_chanel[i].fdsize * MAX_LEN_LOGIN_NAME)))
@@ -55,7 +55,7 @@ int			ft_join_chanel(t_chanels *cha, const char *name, int fd)
 {
 	int i;
 
-	if ((i = ft_is_chanel_exist(cha, name)) == -1)
+	if ((i = ft_is_channel_exist(cha, name)) == -1)
 		return (EXIT_FAILURE);
 	cha->l_chanel[i].fds[fd] = 1;
 	return (EXIT_SUCCESS);
@@ -65,7 +65,7 @@ int			ft_leave_chanel(t_chanels *cha, const char *name, int fd)
 {
 	int i;
 
-	if ((i = ft_is_chanel_exist(cha, name)) == -1)
+	if ((i = ft_is_channel_exist(cha, name)) == -1)
 		return (EXIT_FAILURE);
 	cha->l_chanel[i].fds[fd] = 0;
 	return (EXIT_SUCCESS);
@@ -99,8 +99,8 @@ int			ft_new_chanel(t_chanels *cha, const char *name, size_t nb_fd)
 		return (EXIT_FAILURE);
 	if (cha->nb_chanel_active == cha->nb_chanel)
 		return (EXIT_FAILURE);
-	if (ft_is_chanel_exist(cha, name) != -1)
-		return (EXIT_FAILURE);
+	if (ft_is_channel_exist(cha, name) != -1)
+		return (-1);
 	i = -1;
 	while (++i < cha->nb_chanel)
 		if (!cha->l_chanel[i].fdsize)
