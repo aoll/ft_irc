@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 13:34:01 by aollivie          #+#    #+#             */
-/*   Updated: 2017/11/29 08:37:40 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/01 01:41:16 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 # define LEAVE_CHANNEL			"/leave"
 # define NICKNAME				"/nick"
 # define WHO					"/who"
+
+# define INTERN_ERROR			"ERROR: intern error, please retry\n"
+# define WHO_NEED_CHANNEL		"ERROR: who: must join a channel\n"
+# define WHO_NEED_NO_ARGS		"ERROR: /who need no argument\n"
+# define BUFFER_FULL			"ERROR: buffer full\n"
 
 typedef struct	s_buf
 {
@@ -78,6 +83,13 @@ typedef struct	s_env
 
 }	t_env;
 
+
+int			buf_send_error(t_buf *buf, const char *err_mess, size_t size);
+//cmd
+int			set_name(t_env *e, int cs, char *cmd, int cmdsize);
+int			who(t_env *e, int cs, char *cmd);
+int			new_channel(t_env *e, int cs, char *cmd);
+
 //ft_irc
 int			start_server(int port);
 int			create_server(int port, int nb_conn);
@@ -92,6 +104,7 @@ void		client_write(t_env *e, int cs);
 t_buf		*ft_buf_new(size_t size);
 int			ft_buf_get_data(t_buf *buf_e, char *dest);
 int			ft_buf_add_data(t_buf *buf_e, const char *s, size_t size);
+int	ft_buf_set_data(t_buf *buf, const char *data, size_t size, char *err_mess);
 void		ft_buf_clean(t_buf *buf_e);
 
 //chanel

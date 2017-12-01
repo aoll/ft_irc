@@ -6,7 +6,7 @@
 #    By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/14 17:07:06 by aollivie          #+#    #+#              #
-#    Updated: 2017/11/29 06:29:32 by alex             ###   ########.fr        #
+#    Updated: 2017/12/01 01:08:31 by alex             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,10 @@ SERVER_SRC = start_server.c \
 			buffer_circulaire.c \
 			clean_fd.c \
 			channel.c \
+			who.c \
+			new_channel.c \
+			join_channel.c \
+			set_name.c \
 			fork.c \
 			builtin_cd.c \
 			verfi_dest.c \

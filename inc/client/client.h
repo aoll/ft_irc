@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 05:07:02 by alex              #+#    #+#             */
-/*   Updated: 2017/11/25 17:39:02 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/01 01:42:35 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define PROMPT	"ft_p> "
 
-
+# define INTERN_ERROR				"Intern error\n" //tmp
 #include "ft_p.h"
 
 int			create_client(char *addr, char *port);
