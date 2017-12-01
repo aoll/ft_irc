@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:15:21 by alex              #+#    #+#             */
-/*   Updated: 2017/12/01 01:22:12 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/01 04:05:42 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	switch_requete(t_env *e, int cs, char *command, int cmdsize)
 		exit(EXIT_FAILLURE);
 	if (!ft_strncmp(cmd, NICKNAME, ft_strlen(NICKNAME)))
 	{
-		set_name(e, cs, cmd, cmdsize);
+		set_name(e, cs, cmd);
 	}
 	else if (!ft_strncmp(cmd, NEW_CHANNEL, ft_strlen(NEW_CHANNEL)))
 	{
@@ -63,11 +63,19 @@ int	switch_requete(t_env *e, int cs, char *command, int cmdsize)
 	}
 	else if (!ft_strncmp(cmd, JOIN_CHANNEL, ft_strlen(JOIN_CHANNEL)))
 	{
-		join_channel(e, cs, cmd, cmdsize);
+		join_channel(e, cs, cmd);
+	}
+	else if (!ft_strncmp(cmd, LEAVE_CHANNEL, ft_strlen(LEAVE_CHANNEL)))
+	{
+		leave_channel(e, cs, cmd);
 	}
 	else if (!ft_strncmp(cmd, WHO, ft_strlen(WHO)))
 	{
 		who(e, cs, cmd);
+	}
+	else if (!ft_strncmp(cmd, MSG, ft_strlen(MSG)))
+	{
+		message(e, cs, cmd);
 	}
 	else
 	{

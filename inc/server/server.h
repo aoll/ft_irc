@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 13:34:01 by aollivie          #+#    #+#             */
-/*   Updated: 2017/12/01 01:41:16 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/01 03:19:26 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,19 @@
 # define LEAVE_CHANNEL			"/leave"
 # define NICKNAME				"/nick"
 # define WHO					"/who"
+# define MSG					"/msg"
 
 # define INTERN_ERROR			"ERROR: intern error, please retry\n"
-# define WHO_NEED_CHANNEL		"ERROR: who: must join a channel\n"
+# define WHO_NEED_CHANNEL		"ERROR: /who: must join a channel\n"
 # define WHO_NEED_NO_ARGS		"ERROR: /who need no argument\n"
 # define BUFFER_FULL			"ERROR: buffer full\n"
+# define LEAVE_CHANNEL_NO_ARGS	"ERROR: /leave need no argument\n"
+# define NEWCHANNEL_NEED_NAME	"ERROR: /newchannel need <arg>\n"
+# define CHANNEL_NO_EXIST		"ERROR: channel not exist\n"
+# define CHANNEL_EXIST			"ERROR: channel already exist\n"
+# define NICKNAME_TO_LONG		"ERROR: nickname to long\n"
+# define NICKNAME_NOT_SPACE		"ERROR: space not allowed in a nickname\n"
+# define NICKNAME_NEEDED		"ERROR: need nickname\n"
 
 typedef struct	s_buf
 {
@@ -86,9 +94,12 @@ typedef struct	s_env
 
 int			buf_send_error(t_buf *buf, const char *err_mess, size_t size);
 //cmd
-int			set_name(t_env *e, int cs, char *cmd, int cmdsize);
+int			set_name(t_env *e, int cs, char *cmd);
 int			who(t_env *e, int cs, char *cmd);
+int			join_channel(t_env *e, int cs, char *cmd);
+int			leave_channel(t_env *e, int cs, char *cmd);
 int			new_channel(t_env *e, int cs, char *cmd);
+int			message(t_env *e, int cs, char *cmd);
 
 //ft_irc
 int			start_server(int port);
