@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:47:21 by alex              #+#    #+#             */
-/*   Updated: 2017/12/03 17:41:12 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/03 18:24:15 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	init_fd(t_env *e)
 			{
 				if (e->fds[i].buf_write->size > 0)
 				{
-					if (*(e->fds[i].buf_write->end_data - 1) == 10)
+					if (*(e->fds[i].buf_write->end_data - 1) == 10 ||
+					(e->fds[i].buf_write->end_data ==
+						e->fds[i].buf_write->start_buf &&
+					*(e->fds[i].buf_write->end_buf - 1) == 10))
 					{
 						FD_SET(i, &e->fd_write);
 					}
