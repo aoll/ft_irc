@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:47:21 by alex              #+#    #+#             */
-/*   Updated: 2017/12/01 00:18:50 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/03 17:41:12 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	init_fd(t_env *e)
 			{
 				if (e->fds[i].buf_write->size > 0)
 				{
-					FD_SET(i, &e->fd_write);
+					if (*(e->fds[i].buf_write->end_data - 1) == 10)
+					{
+						FD_SET(i, &e->fd_write);
+					}
 				}
 			}
 			e->max = MAX(e->max, i);

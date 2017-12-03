@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 03:01:58 by alex              #+#    #+#             */
-/*   Updated: 2017/12/01 04:26:34 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/03 17:37:42 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,39 +40,24 @@ static int	send_dada(t_env *e, int cs, char *buf, char *target_name)
 {
 	int i;
 
-	printf("%d, %s, %s\n", cs, buf, target_name);
 	i = -1;
 	while (++i < e->maxfd)
 	{
 		if ((e->fds[i].type == FD_CLIENT) &&
 			(i != cs) && !ft_strcmp(e->fds[i].name, target_name))
 		{
-			printf("%s, %s", e->fds[i].name, target_name);
-			if (ft_buf_add_data(
-				e->fds[i].buf_write, e->fds[cs].name, ft_strlen(e->fds[cs].name)))
-			{
-				ft_buf_clean(e->fds[i].buf_write);
-				printf("%s\n", "ERROR: too much data");
+			if (ft_buf_set_data(e->fds[i].buf_write, e->fds[cs].name,
+				ft_strlen(e->fds[cs].name), "ERROR: too much data"))
 				return (EXIT_FAILURE);
-			}
-			if (ft_buf_add_data(e->fds[i].buf_write, ": ", 2))
-			{
-				ft_buf_clean(e->fds[i].buf_write);
-				printf("%s\n", "ERROR: too much data");
+			if (ft_buf_set_data(e->fds[i].buf_write, ": ",
+			2, "ERROR: too much data"))
 				return (EXIT_FAILURE);
-			}
-			if (ft_buf_add_data(e->fds[i].buf_write, buf, ft_strlen(buf)))
-			{
-				ft_buf_clean(e->fds[i].buf_write);
-				printf("%s\n", "ERROR: too much data");
+			if (ft_buf_set_data(e->fds[i].buf_write, buf, ft_strlen(buf),
+			"ERROR: too much data"))
 				return (EXIT_FAILURE);
-			}
-			if (ft_buf_add_data(e->fds[i].buf_write, "\n", 1))
-			{
-				ft_buf_clean(e->fds[i].buf_write);
-				printf("%s\n", "ERROR: too much data");
+			if (ft_buf_set_data(e->fds[i].buf_write, "\n", 1,
+			"ERROR: too much data"))
 				return (EXIT_FAILURE);
-			}
 			return (EXIT_SUCCESS);
 		}
 	}
