@@ -6,7 +6,7 @@
 #    By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/14 17:07:06 by aollivie          #+#    #+#              #
-#    Updated: 2017/12/04 12:41:20 by alex             ###   ########.fr        #
+#    Updated: 2017/12/04 14:15:28 by alex             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,10 @@ O_DIR= obj
 
 MKDIR = mkdir
 
-CLIENT_SRC = requete.c builtin_requete.c create_client.c
+CLIENT_FTP_SRC = requete.c builtin_requete.c
+
+CLIENT_SRC= create_client.c start_client.c
+
 SERVER_SRC = start_server.c \
 			create_server.c \
 			init_env.c \
@@ -53,18 +56,14 @@ SERVER_SRC = start_server.c \
 			leave_channel.c \
 			message.c \
 			set_name.c \
-			buf_send_error.c 
+			buf_send_error.c
 
-C_SRC = send_requet.c \
-		map_file.c \
-		get_reponse.c \
-		get_requet.c \
-		send_reponse.c
+C_SRC =
 C_IRC = buffer_circulaire.c chanel.c create_server.c process.c tool.c
 
 VPATH= .:src:src/client:src/server:src/irc
 
-OBJS= $(C_SRC:%.c=$(O_DIR)/%.o) $(CLIENT_SRC:%.c=$(O_DIR)/%.o) \
+OBJS= $(CLIENT_SRC:%.c=$(O_DIR)/%.o) \
  		$(SERVER_SRC:%.c=$(O_DIR)/%.o)
 
 .PHONY : all clean fclean re
@@ -95,10 +94,10 @@ $(O_DIR):
 				$(MKDIR) $(O_DIR)
 clean :
 		rm -rf $(O_DIR)
-		# make clean -C libft
+		make clean -C libft
 
 fclean : clean
 		@rm -rf $(NAME_SERVER) $(NAME_CLIENT)
-		# make fclean -C libft
+		make fclean -C libft
 
 re : fclean all
