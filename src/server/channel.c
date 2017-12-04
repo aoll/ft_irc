@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:19:15 by alex              #+#    #+#             */
-/*   Updated: 2017/11/29 08:37:13 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/04 11:27:07 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,6 @@ int			ft_is_channel_exist(t_chanels *cha, const char *name)
 	}
 	return (-1);
 }
-
-// char	*ft_chanel_who(t_chanels *cha, const char *name)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	*s;
-//
-// 	if ((i = ft_is_channel_exist(cha, name)) == -1)
-// 		return (EXIT_FAILURE);
-// 	j = 0;
-// 	if (!(s = ft_strnew(cha->l_chanel[i].fdsize * MAX_LEN_LOGIN_NAME)))
-// 		return (NULL);
-// 	while (j < cha->l_chanel[i].fdsize)
-// 	{
-// 		if (cha->l_chanel[i].fds[j])
-// 		{
-// 			//j est lindex dans la liste des sockets
-// 		}
-// 	}
-// }
 
 int			ft_join_chanel(t_chanels *cha, const char *name, int fd)
 {

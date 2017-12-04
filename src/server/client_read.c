@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:15:21 by alex              #+#    #+#             */
-/*   Updated: 2017/12/01 04:05:42 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/04 12:38:10 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ int	switch_requete(t_env *e, int cs, char *command, int cmdsize)
 	{
 		message(e, cs, cmd);
 	}
-	else
-	{
-		send_dada(e, cs, cmd, cmdsize);
-	}
+	// else
+	// {
+	// 	send_dada(e, cs, cmd, cmdsize);
+	// }
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 #    By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/14 17:07:06 by aollivie          #+#    #+#              #
-#    Updated: 2017/12/01 03:03:56 by alex             ###   ########.fr        #
+#    Updated: 2017/12/04 12:41:20 by alex             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,14 +53,7 @@ SERVER_SRC = start_server.c \
 			leave_channel.c \
 			message.c \
 			set_name.c \
-			buf_send_error.c \
-			fork.c \
-			builtin_cd.c \
-			verfi_dest.c \
-			new_process.c \
-			cs.c \
-			requete_server.c \
-			command.c
+			buf_send_error.c 
 
 C_SRC = send_requet.c \
 		map_file.c \
