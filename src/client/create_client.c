@@ -6,14 +6,14 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 17:35:48 by alex              #+#    #+#             */
-/*   Updated: 2017/11/25 22:21:40 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/05 15:27:14 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
 static void			init_addrinfo(
-	char * addr, struct addrinfo *hints, struct in6_addr *serveraddr)
+	char *addr, struct addrinfo *hints, struct in6_addr *serveraddr)
 {
 	int rc;
 

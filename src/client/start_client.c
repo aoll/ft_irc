@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 13:23:45 by alex              #+#    #+#             */
-/*   Updated: 2017/12/04 15:24:42 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 05:15:01 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	new_connection(int sock, char *buf)
 	char	port[BUF_SIZE];
 	char	**split;
 
-	if (!(split = ft_strsplit(buf + 8, ' ')))
+	if (!(split = ft_strsplit(buf, ' ')))
 		exit (EXIT_FAILURE);
 	ft_strcpy(addr, split[0]);
 	ft_strcpy(port, split[1]);
@@ -101,7 +101,7 @@ int	listen_client(int sock, int stdin)
 			read_sock_sock(sock, sock);
 		if (FD_ISSET(stdin, &fd_read))
 			if (read_sock_stdin(stdin, sock, buf) == 2)
-				return (new_connection(sock, buf));
+				return (new_connection(sock, buf + 8));
 		if (FD_ISSET(sock, &fd_write) && ft_strlen(buf))
 			write_sock(sock, buf, ft_strlen(buf));
 	}
@@ -120,7 +120,7 @@ int	start_client(char *addr, char *port)
 		free(trim_addr);
 		exit (EXIT_FAILURE);
 	}
-	if (!(sock = create_client(trim_addr, trim_port)))
+	if ((sock = create_client(trim_addr, trim_port)) <= 0)
 		return (EXIT_FAILURE);
 	free(trim_addr);
 	free(trim_port);

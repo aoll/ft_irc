@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:12:04 by alex              #+#    #+#             */
-/*   Updated: 2017/11/29 08:26:09 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 05:04:35 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ int			init_env_channel(t_env *e)
 	if (!(e->channels = ft_chanels_init(NB_MAX_CHANNEL)))
 	{
 		return (EXIT_FAILLURE);
+	}
+	if (ft_new_chanel(e->channels, "general", e->maxfd))
+	{
+		printf("%s\n", "ERROR: init_env_channel");
+	}
+	if (ft_new_chanel(e->channels, "fun", e->maxfd))
+	{
+		printf("%s\n", "ERROR: init_env_channel");
 	}
 	return (EXIT_SUCCESS);
 }

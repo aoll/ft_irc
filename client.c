@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:54:52 by alex              #+#    #+#             */
-/*   Updated: 2017/12/04 14:48:34 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 05:10:24 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	main(int ac, char **av)
 {
 	if (ac < 2 || ac > 3)
 		usage(av[0]);
-	start_client(av[1], av[2]);
+	if (av[2])
+		return start_client(av[1], av[2]);
+	else
+		return new_connection(0, av[1]);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 05:07:02 by alex              #+#    #+#             */
-/*   Updated: 2017/12/04 14:48:12 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 05:09:05 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "ft_p.h"
 #include "ft_irc.h"
 
+int			new_connection(int sock, char *buf);
 int			start_client(char *addr, char *port);
 int			create_client(char *addr, char *port);
 // int			switch_requet_client(int fd, char *requet);
