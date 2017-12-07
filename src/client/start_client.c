@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 13:23:45 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 13:55:12 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/07 14:18:23 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			new_connection(int sock, char *buf)
 	char	**split;
 	char	*trim;
 
+	replace_char(buf, '\t', ' ');
 	if (!(trim = ft_strtrim(buf)))
 		exit(EXIT_FAILURE);
 	if (*trim == '"' || *trim == '\'')

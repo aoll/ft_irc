@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/07 14:03:41 by aollivie          #+#    #+#             */
+/*   Updated: 2017/12/07 14:03:53 by aollivie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
@@ -5,9 +17,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
-
 #include "server.h"
-
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
@@ -17,12 +27,11 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
-
 /*
 ** usage
 */
 
-void	usage(char *s)
+static void	usage(char *s)
 {
 	printf("Usage: %s <port>\n", s);
 	exit(EXIT_FAILLURE);
@@ -32,7 +41,7 @@ void	usage(char *s)
 ** TCP/IP (v4) server example from 42 school
 */
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int					port;
 

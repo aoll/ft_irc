@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 05:07:02 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 12:01:36 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/07 14:20:02 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int			start_client(char *addr, char *port);
 int			create_client(char *addr, char *port);
 int			read_sock_stdin(int fd, char *buf);
 int			read_sock_sock(int fd);
+void		replace_char(char *s, int to_replace, int replace_with);
 
 #endif

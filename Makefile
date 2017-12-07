@@ -6,7 +6,7 @@
 #    By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/14 17:07:06 by aollivie          #+#    #+#              #
-#    Updated: 2017/12/07 12:51:12 by aollivie         ###   ########.fr        #
+#    Updated: 2017/12/07 14:19:41 by aollivie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ else
 		CFLAGS=  -Wall -Wextra -Werror
 endif
 
-NAME_SERVER = server
+NAME_SERVER = serveur
 
 NAME_CLIENT = client
 
@@ -38,7 +38,7 @@ O_DIR= obj
 
 MKDIR = mkdir
 
-CLIENT_SRC= create_client.c start_client.c read_fd.c
+CLIENT_SRC= create_client.c start_client.c read_fd.c replace_char.c
 
 SERVER_SRC = start_server.c \
 			create_server.c \
