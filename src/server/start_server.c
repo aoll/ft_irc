@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:47:21 by alex              #+#    #+#             */
-/*   Updated: 2017/12/03 18:24:15 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 10:54:13 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,15 @@ void	init_fd(t_env *e)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	e->max = 0;
 	FD_ZERO(&e->fd_read);
 	FD_ZERO(&e->fd_write);
-	while (i < e->maxfd)
-	{
+	while (++i < e->maxfd)
 		if (e->fds[i].type != FD_FREE)
 		{
 			FD_SET(i, &e->fd_read);
 			if (e->fds[i].type == FD_CLIENT)
-			{
 				if (e->fds[i].buf_write->size > 0)
 				{
 					if (*(e->fds[i].buf_write->end_data - 1) == 10 ||
@@ -55,14 +53,11 @@ void	init_fd(t_env *e)
 						FD_SET(i, &e->fd_write);
 					}
 				}
-			}
 			e->max = MAX(e->max, i);
 		}
-		i++;
-	}
 }
 
-int	server_listen(t_env *e)
+int		server_listen(t_env *e)
 {
 	while (42)
 	{

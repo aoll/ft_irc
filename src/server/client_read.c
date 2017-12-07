@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:15:21 by alex              #+#    #+#             */
-/*   Updated: 2017/12/04 12:38:10 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 10:52:23 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,40 +47,28 @@ void	send_dada(t_env *e, int cs, char *buf, int r)
 	return ;
 }
 
-int	switch_requete(t_env *e, int cs, char *command, int cmdsize)
+int	switch_requete(t_env *e, int cs, char *command)
 {
 	char *cmd;
 
 	if (!(cmd = ft_strtrim(command)))
 		exit(EXIT_FAILLURE);
 	if (!ft_strncmp(cmd, NICKNAME, ft_strlen(NICKNAME)))
-	{
 		set_name(e, cs, cmd);
-	}
 	else if (!ft_strncmp(cmd, NEW_CHANNEL, ft_strlen(NEW_CHANNEL)))
-	{
 		new_channel(e, cs, cmd);
-	}
 	else if (!ft_strncmp(cmd, JOIN_CHANNEL, ft_strlen(JOIN_CHANNEL)))
-	{
 		join_channel(e, cs, cmd);
-	}
 	else if (!ft_strncmp(cmd, LEAVE_CHANNEL, ft_strlen(LEAVE_CHANNEL)))
-	{
 		leave_channel(e, cs, cmd);
-	}
 	else if (!ft_strncmp(cmd, WHO, ft_strlen(WHO)))
-	{
 		who(e, cs, cmd);
-	}
 	else if (!ft_strncmp(cmd, MSG, ft_strlen(MSG)))
-	{
 		message(e, cs, cmd);
-	}
-	// else
-	// {
-	// 	send_dada(e, cs, cmd, cmdsize);
-	// }
+	else
+		if (ft_buf_add_data(e->fds[cs].buf_write, "ERROR: unknow cmd\n",
+		ft_strlen("ERROR: unknow cmd\n")))
+			ft_buf_clean(e->fds[cs].buf_write);
 	return (EXIT_SUCCESS);
 }
 
@@ -108,8 +96,7 @@ void	recv_data(t_env *e, int cs, char *buf, int r)
 			return ;
 		}
 		printf("buf_size: %d\n", buf_size);
-		switch_requete(e, cs, data, buf_size);
-		// send_dada(e, cs, data, buf_size);
+		switch_requete(e, cs, data);
 	}
 	return ;
 }

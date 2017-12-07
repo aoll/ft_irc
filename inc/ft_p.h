@@ -6,21 +6,21 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 16:42:38 by aollivie          #+#    #+#             */
-/*   Updated: 2017/12/01 01:40:45 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 11:54:05 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_P_H
 # define FT_P_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <strings.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/socket.h>
+# include <netdb.h>
+# include <unistd.h>
+# include <netinet/in.h>
+# include <arpa/inet.h>
+# include <strings.h>
 # include <sys/mman.h>
 # include <fcntl.h>
 # include <sys/stat.h>
@@ -33,6 +33,7 @@
 # define NO_LOG						0
 # define MAGIC_NUMER				42
 # define SIZE_HEADER				(sizeof(uint32_t) * 2)
+# define BUF_SIZE					4096
 
 # define EXIT_FAILLURE				1
 # define EXIT_SUCCESS				0
@@ -52,7 +53,6 @@
 
 # define TRANSFERT_FAIL				"Transfert fail\n"
 # define CONNECTION_LOST			"Connection lost\n"
-// # define INTERN_ERROR				"Intern error\n"
 # define NO_ACCESS					"No access\n"
 # define SUCCESS					"SUCCESS\n"
 # define ERROR						"ERROR\n"
@@ -84,7 +84,7 @@ typedef struct	s_header
 {
 	uint32_t	requet;
 	uint32_t	size;
-}	t_header;
+}				t_header;
 
 typedef struct	s_cs
 {
@@ -92,19 +92,21 @@ typedef struct	s_cs
 	char		*home;
 	char		*pwd;
 	char		*oldpwd;
-}	t_cs;
+}				t_cs;
 
-int	send_success(int fd);
-int	send_error(int fd, char *error);
-int	send_requet(int fd, uint32_t requet, uint32_t size, const void *data);
-int	wait_reponse(int fd, unsigned int reponse, int size, int is_log);
-int	send_success(int fd);
-int	send_error(int fd, char *error);
-int	print_reponse(void *reponse);
-int	map_file(const char *file_name, char **buf);
-int	get_reponse(int fd, char *requet);
-int	recv_by_size(int fd, int output);
-int	get_requet(int fd, char **requet, int is_log);
-int send_data_by_size(int fd, void *data, size_t size);
+int				send_success(int fd);
+int				send_error(int fd, char *error);
+int				send_requet(
+	int fd, uint32_t requet, uint32_t size, const void *data);
+int				wait_reponse(
+	int fd, unsigned int reponse, int size, int is_log);
+int				send_success(int fd);
+int				send_error(int fd, char *error);
+int				print_reponse(void *reponse);
+int				map_file(const char *file_name, char **buf);
+int				get_reponse(int fd, char *requet);
+int				recv_by_size(int fd, int output);
+int				get_requet(int fd, char **requet, int is_log);
+int				send_data_by_size(int fd, void *data, size_t size);
 
 #endif

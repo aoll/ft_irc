@@ -137,5 +137,5 @@ void	test_cha(void)
 		printf("%s\n", "ERROR leave CHANEL");
 	if (ft_del_chanel(cha, "test"))
 		printf("%s\n", "ERROR leave CHANEL");
-	return;
+	return ;
 }

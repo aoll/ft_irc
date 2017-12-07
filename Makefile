@@ -6,12 +6,12 @@
 #    By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/14 17:07:06 by aollivie          #+#    #+#              #
-#    Updated: 2017/12/04 14:15:28 by alex             ###   ########.fr        #
+#    Updated: 2017/12/07 12:17:06 by aollivie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-DEBUG=yes
+DEBUG=no
 CC=clang
 
 ifeq ($(DEBUG), yes)
@@ -28,7 +28,7 @@ LIBFT =libft/libft.a
 
 
 
-I_DIR= -I inc/ -I inc/irc -I inc/server -I inc/client -I libft/inc
+I_DIR= -I inc/ -I inc/server -I inc/client -I libft/inc
 
 ifeq ($(LANG),fr)
 	I_DIR= -I inc/ -I./libft/inc
@@ -38,9 +38,7 @@ O_DIR= obj
 
 MKDIR = mkdir
 
-CLIENT_FTP_SRC = requete.c builtin_requete.c
-
-CLIENT_SRC= create_client.c start_client.c
+CLIENT_SRC= create_client.c start_client.c read_fd.c
 
 SERVER_SRC = start_server.c \
 			create_server.c \

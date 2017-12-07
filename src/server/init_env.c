@@ -44,7 +44,7 @@ static void		srv_accept(t_env *e, int s)
 	if ((cs = accept(s, (struct sockaddr*)&csin, &csin_len)) == -1)
 	{
 		printf("%s\n", "ERROR ACCEPT");
-		exit (1);
+		exit(1);
 	}
 	printf("New client #%d from %s:%d\n", cs,
 		inet_ntoa(csin.sin_addr), ntohs(csin.sin_port));

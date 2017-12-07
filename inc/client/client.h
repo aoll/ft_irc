@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 05:07:02 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 05:09:05 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 12:01:36 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,13 @@
 
 # define PROMPT	"ft_p> "
 
-# define INTERN_ERROR				"Intern error\n" //tmp
-#include "ft_p.h"
-#include "ft_irc.h"
+# define INTERN_ERROR				"Intern error\n"
+# include "ft_p.h"
 
 int			new_connection(int sock, char *buf);
 int			start_client(char *addr, char *port);
 int			create_client(char *addr, char *port);
-// int			switch_requet_client(int fd, char *requet);
-// int			requet_put(int fd, char *requet);
-// int			requet_get(int fd, char *requet);
-// int			requet_cmd(int fd, char *requet, int output);
-// int			quit_requet_client(int fd, char *requet);
-// int			cd_requet_client(int fd, char *requet);
-// int			requet_client(int fd, char *requet, int output);
-// int			read_result_cmd(int fd, int output);
+int			read_sock_stdin(int fd, char *buf);
+int			read_sock_sock(int fd);
+
 #endif

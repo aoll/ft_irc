@@ -29,7 +29,7 @@ void	ft_buf_clean(t_buf *buf_e)
 	buf_e->size = 0;
 	buf_e->start_data = buf_e->start_buf;
 	buf_e->end_data = buf_e->start_buf;
-	return;
+	return ;
 }
 
 t_buf		*ft_buf_new(size_t size)
