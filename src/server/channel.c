@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:19:15 by alex              #+#    #+#             */
-/*   Updated: 2017/12/04 11:27:07 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 12:47:04 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,6 @@ int			ft_leave_chanel(t_chanels *cha, const char *name, int fd)
 	return (EXIT_SUCCESS);
 }
 
-int			ft_del_chanel(t_chanels *cha, const char *name)
-{
-	int	i;
-
-	i = 0;
-	while (i < cha->nb_chanel)
-	{
-		if (cha->l_chanel[i].fdsize &&
-			!ft_strcmp(cha->l_chanel[i].name, name))
-		{
-			free(cha->l_chanel[i].name);
-			free(cha->l_chanel[i].fds);
-			ft_bzero(&cha->l_chanel[i], sizeof(cha->l_chanel[i]));
-			cha->nb_chanel_active--;
-			return (EXIT_SUCCESS);
-		}
-		i++;
-	}
-	return (EXIT_FAILURE);
-}
 int			ft_new_chanel(t_chanels *cha, const char *name, size_t nb_fd)
 {
 	int	i;
@@ -115,27 +95,4 @@ t_chanels	*ft_chanels_init(size_t nb_chanel)
 	}
 	ft_bzero((void *)cha->l_chanel, sizeof(*cha->l_chanel) * nb_chanel);
 	return (cha);
-}
-
-/*
-** test_cha
-*/
-
-void	test_cha(void)
-{
-	t_chanels	*cha;
-
-	if (!(cha = ft_chanels_init(8)))
-		printf("%s\n", "ERROR: INIT CHANEL");
-	if (ft_new_chanel(cha, "test", 42))
-		printf("%s\n", "ERROR NEW CHANEL");
-	printf("name chanel : %s\n", cha->l_chanel[0].name);
-	printf("fdsize chanel : %d\n", cha->l_chanel[0].fdsize);
-	if (ft_join_chanel(cha, "test", 1))
-		printf("%s\n", "ERROR JOIN CHANEL");
-	if (ft_leave_chanel(cha, "test", 1))
-		printf("%s\n", "ERROR leave CHANEL");
-	if (ft_del_chanel(cha, "test"))
-		printf("%s\n", "ERROR leave CHANEL");
-	return ;
 }

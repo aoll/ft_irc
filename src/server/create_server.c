@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:28:09 by alex              #+#    #+#             */
-/*   Updated: 2017/11/29 01:31:04 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 12:56:15 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	create_server(int port, int nb_conn)
 	sin.sin6_addr = in6addr_any;
 	if (bind(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
 	{
-		close (sock);
+		close(sock);
 		return (-1);
 	}
 	if (listen(sock, nb_conn) == -1)
 	{
-		close (sock);
+		close(sock);
 		return (-1);
 	}
 	return (sock);

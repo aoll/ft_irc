@@ -6,13 +6,13 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:47:21 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 10:54:13 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/07 12:58:08 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-void	check_fd(t_env *e)
+static void	check_fd(t_env *e)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ void	check_fd(t_env *e)
 	}
 }
 
-void	init_fd(t_env *e)
+static void	init_fd(t_env *e)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ void	init_fd(t_env *e)
 		}
 }
 
-int		server_listen(t_env *e)
+static int	server_listen(t_env *e)
 {
 	while (42)
 	{
@@ -76,7 +76,7 @@ int		server_listen(t_env *e)
 	return (EXIT_SUCCESS);
 }
 
-int	start_server(int port)
+int			start_server(int port)
 {
 	t_env				e;
 
@@ -87,7 +87,5 @@ int	start_server(int port)
 	}
 	printf("%s\n", "Yo!");
 	server_listen(&e);
-	// close(cs);
-	// close(3);
 	return (EXIT_SUCCESS);
 }

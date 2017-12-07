@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:12:04 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 05:04:35 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 12:59:01 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static void		new_client(t_env *e, int cs)
 
 static void		srv_accept(t_env *e, int s)
 {
-	int			cs;
+	int					cs;
 	struct sockaddr_in	csin;
-	socklen_t		csin_len;
+	socklen_t			csin_len;
 
 	csin_len = sizeof(csin);
 	if ((cs = accept(s, (struct sockaddr*)&csin, &csin_len)) == -1)
@@ -51,9 +51,9 @@ static void		srv_accept(t_env *e, int s)
 	new_client(e, cs);
 }
 
-static int	init_env_fd(t_env *e)
+static int		init_env_fd(t_env *e)
 {
-	int		i;
+	int				i;
 	struct rlimit	rlp;
 
 	if (getrlimit(RLIMIT_NOFILE, &rlp))
@@ -70,7 +70,7 @@ static int	init_env_fd(t_env *e)
 	return (EXIT_SUCCESS);
 }
 
-int			init_env_channel(t_env *e)
+static int		init_env_channel(t_env *e)
 {
 	if (!(e->channels = ft_chanels_init(NB_MAX_CHANNEL)))
 	{
@@ -87,7 +87,7 @@ int			init_env_channel(t_env *e)
 	return (EXIT_SUCCESS);
 }
 
-int			init_env(t_env *e, int port)
+int				init_env(t_env *e, int port)
 {
 	int sock;
 

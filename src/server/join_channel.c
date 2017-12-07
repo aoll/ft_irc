@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 00:50:42 by alex              #+#    #+#             */
-/*   Updated: 2017/12/01 02:42:34 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 12:52:24 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ret_err(const char *err_mess)
 	return (EXIT_FAILLURE);
 }
 
-int	join_channel(t_env *e, int cs, char *cmd)
+int			join_channel(t_env *e, int cs, char *cmd)
 {
 	int		ret;
 	char	*trim;

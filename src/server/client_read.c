@@ -6,48 +6,13 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:15:21 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 10:52:23 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/07 12:55:45 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-void	send_dada(t_env *e, int cs, char *buf, int r)
-{
-	int i;
-
-	printf("read: %d, %s\n",r, buf);
-	i = -1;
-	while (++i < e->maxfd)
-	{
-		if ((e->fds[i].type == FD_CLIENT) &&
-			(i != cs))
-		{
-			if (ft_buf_add_data(
-				e->fds[i].buf_write, e->fds[cs].name, ft_strlen(e->fds[cs].name)))
-			{
-				ft_buf_clean(e->fds[i].buf_write);
-				printf("%s\n", "ERROR: too much data");
-				return ;
-			}
-			if (ft_buf_add_data(e->fds[i].buf_write, ": ", 2))
-			{
-				ft_buf_clean(e->fds[i].buf_write);
-				printf("%s\n", "ERROR: too much data");
-				return ;
-			}
-			if (ft_buf_add_data(e->fds[i].buf_write, buf, r))
-			{
-				ft_buf_clean(e->fds[i].buf_write);
-				printf("%s\n", "ERROR: too much data");
-				return ;
-			}
-		}
-	}
-	return ;
-}
-
-int	switch_requete(t_env *e, int cs, char *command)
+int		switch_requete(t_env *e, int cs, char *command)
 {
 	char *cmd;
 
@@ -66,16 +31,18 @@ int	switch_requete(t_env *e, int cs, char *command)
 	else if (!ft_strncmp(cmd, MSG, ft_strlen(MSG)))
 		message(e, cs, cmd);
 	else
+	{
 		if (ft_buf_add_data(e->fds[cs].buf_write, "ERROR: unknow cmd\n",
-		ft_strlen("ERROR: unknow cmd\n")))
+			ft_strlen("ERROR: unknow cmd\n")))
 			ft_buf_clean(e->fds[cs].buf_write);
+	}
 	return (EXIT_SUCCESS);
 }
 
 void	recv_data(t_env *e, int cs, char *buf, int r)
 {
-	char data[BUF_SIZE + 1];
-	int	buf_size;
+	char	data[BUF_SIZE + 1];
+	int		buf_size;
 
 	printf("BUF: %s\n", buf);
 	ft_bzero(data, BUF_SIZE + 1);
@@ -103,8 +70,8 @@ void	recv_data(t_env *e, int cs, char *buf, int r)
 
 void	client_read(t_env *e, int cs)
 {
-	int	r;
-	char buf[BUF_SIZE + 1];
+	int		r;
+	char	buf[BUF_SIZE + 1];
 
 	ft_bzero(buf, BUF_SIZE + 1);
 	r = recv(cs, buf, BUF_SIZE, 0);

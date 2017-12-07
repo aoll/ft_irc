@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 00:23:49 by alex              #+#    #+#             */
-/*   Updated: 2017/12/01 02:40:58 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 12:57:04 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ret_err(t_buf *buf)
 static int	who_add_list(t_env *e, int cs, int index_channel)
 {
 	int		i;
-	int tmp;
+	int		tmp;
 
 	i = 0;
 	while (i < e->maxfd)

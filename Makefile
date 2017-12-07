@@ -6,7 +6,7 @@
 #    By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/14 17:07:06 by aollivie          #+#    #+#              #
-#    Updated: 2017/12/07 12:17:06 by aollivie         ###   ########.fr        #
+#    Updated: 2017/12/07 12:51:12 by aollivie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ SERVER_SRC = start_server.c \
 			leave_channel.c \
 			message.c \
 			set_name.c \
-			buf_send_error.c
+			buf_send_error.c \
+			clean_buffer_circulaire.c
 
 C_SRC =
 C_IRC = buffer_circulaire.c chanel.c create_server.c process.c tool.c

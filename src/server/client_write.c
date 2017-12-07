@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:18:45 by alex              #+#    #+#             */
-/*   Updated: 2017/11/29 05:32:12 by alex             ###   ########.fr       */
+/*   Updated: 2017/12/07 12:52:11 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	client_write(t_env *e, int cs)
 {
-	char buf[BUF_SIZE + 1];
-	int	buf_size;
+	char	buf[BUF_SIZE + 1];
+	int		buf_size;
 
 	ft_bzero(buf, BUF_SIZE + 1);
 	buf_size = ft_buf_get_data(e->fds[cs].buf_write, buf);

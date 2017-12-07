@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 13:23:45 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 12:02:18 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/07 12:45:43 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	listen_client(int sock, int stdin)
 	fd_set		fd_read;
 	fd_set		fd_write;
 	int			r;
-	char 		buf[BUF_SIZE + 1];
+	char		buf[BUF_SIZE + 1];
 
 	ft_bzero(buf, BUF_SIZE + 1);
 	while (42)
