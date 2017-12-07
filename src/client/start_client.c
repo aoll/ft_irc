@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 13:23:45 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 12:45:43 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/07 13:55:12 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,15 @@ int			new_connection(int sock, char *buf)
 	char	addr[BUF_SIZE];
 	char	port[BUF_SIZE];
 	char	**split;
+	char	*trim;
 
-	if (!(split = ft_strsplit(buf, ' ')))
+	if (!(trim = ft_strtrim(buf)))
+		exit(EXIT_FAILURE);
+	if (*trim == '"' || *trim == '\'')
+		*trim = ' ';
+	if (trim[ft_strlen(trim) - 1] == '"' || trim[ft_strlen(trim) - 1] == '\'')
+		trim[ft_strlen(trim) - 1] = ' ';
+	if (!(split = ft_strsplit(trim, ' ')))
 		exit(EXIT_FAILURE);
 	ft_strcpy(addr, split[0]);
 	ft_strcpy(port, split[1]);

@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:12:04 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 12:59:01 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/07 13:13:51 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static void		new_client(t_env *e, int cs)
 	e->fds[cs].type = FD_CLIENT;
 	e->fds[cs].fct_read = client_read;
 	e->fds[cs].fct_write = client_write;
-	if (!(e->fds[cs].buf_read = ft_buf_new(BUF_SIZE)))
+	if (!(e->fds[cs].buf_read = ft_buf_new(BUF_SIZE_MAX)))
 	{
 		printf("%s\n", "ERROR: new_client");
 		exit(EXIT_FAILURE);
 	}
-	if (!(e->fds[cs].buf_write = ft_buf_new(BUF_SIZE)))
+	if (!(e->fds[cs].buf_write = ft_buf_new(BUF_SIZE_MAX)))
 	{
 		printf("%s\n", "ERROR: new_client");
 		exit(EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 16:42:38 by aollivie          #+#    #+#             */
-/*   Updated: 2017/12/07 11:54:05 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/07 13:14:28 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 # define NO_LOG						0
 # define MAGIC_NUMER				42
 # define SIZE_HEADER				(sizeof(uint32_t) * 2)
-# define BUF_SIZE					4096
+# define BUF_SIZE					256
+# define BUF_SIZE_MAX				4096
 
 # define EXIT_FAILLURE				1
 # define EXIT_SUCCESS				0
