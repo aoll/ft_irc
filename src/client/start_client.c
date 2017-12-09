@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 13:23:45 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 14:18:23 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/09 17:39:43 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	init_fd_client(
 {
 	FD_ZERO(fd_read);
 	FD_ZERO(fd_write);
-	FD_SET(sock, fd_read);
+	if (sock > 0)
+		FD_SET(sock, fd_read);
 	FD_SET(stdin, fd_read);
 	return (EXIT_SUCCESS);
 }
@@ -37,7 +38,9 @@ int			new_connection(int sock, char *buf)
 	char	**split;
 	char	*trim;
 
+	printf("%s\n", "hello new connection");
 	replace_char(buf, '\t', ' ');
+	replace_char(buf, ':', ' ');
 	if (!(trim = ft_strtrim(buf)))
 		exit(EXIT_FAILURE);
 	if (*trim == '"' || *trim == '\'')
@@ -48,28 +51,30 @@ int			new_connection(int sock, char *buf)
 		exit(EXIT_FAILURE);
 	ft_strcpy(addr, split[0]);
 	ft_strcpy(port, split[1]);
-	if (sock)
+	if (sock > 0)
 	{
 		close(sock);
 	}
 	ft_array_free(&split);
+	printf("%s\n", "before start client");
 	return (start_client(addr, port));
 }
 
-static int	listen_client(int sock, int stdin)
+int			listen_client(int sock, int stdin)
 {
 	fd_set		fd_read;
 	fd_set		fd_write;
 	int			r;
 	char		buf[BUF_SIZE + 1];
 
+	printf("sock: %d - STDIN: %d\n", sock, stdin);
 	ft_bzero(buf, BUF_SIZE + 1);
 	while (42)
 	{
 		init_fd_client(&fd_read, &fd_write, sock, stdin);
-		if (ft_strlen(buf))
+		if (sock > 0 && ft_strlen(buf))
 			FD_SET(sock, &fd_write);
-		r = select(sock + 1, &fd_read, &fd_write, NULL, NULL);
+		r = select(sock > 0 ? sock + 1 : 1 + 1, &fd_read, &fd_write, NULL, NULL);
 		if (!r)
 			continue ;
 		if (FD_ISSET(sock, &fd_read))

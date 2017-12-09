@@ -6,22 +6,24 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:54:52 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 10:55:05 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/09 17:12:46 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
-static void	usage(const char *name)
-{
-	printf("Usage %s <machine> <port> || [machine [port]]\n", name);
-	return ;
-}
+// static void	usage(const char *name)
+// {
+// 	printf("Usage %s <machine> <port> || [machine [port]]\n", name);
+// 	return ;
+// }
 
 int			main(int ac, char **av)
 {
-	if (ac < 2 || ac > 3)
-		usage(av[0]);
+	// if (ac < 2 || ac > 3)
+	// 	usage(av[0]);
+	if (ac == 1)
+		return (listen_client(-1, STDIN));
 	if (av[2])
 		return (start_client(av[1], av[2]));
 	else

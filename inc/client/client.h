@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 05:07:02 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 14:20:02 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/09 17:12:24 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define INTERN_ERROR				"Intern error\n"
 # include "ft_p.h"
 
+int			listen_client(int sock, int stdin);
 int			new_connection(int sock, char *buf);
 int			start_client(char *addr, char *port);
 int			create_client(char *addr, char *port);
