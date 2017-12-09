@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:12:04 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 13:13:51 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/09 16:09:33 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void		new_client(t_env *e, int cs)
 	ft_strcpy(e->fds[cs].name, GUEST);
 	ft_strcpy(e->fds[cs].name + ft_strlen(GUEST), ft_itoa(cs));
 	ft_bzero(e->fds[cs].channel, MAX_LEN_CHANEL_NAME);
+	join_channel(e, cs, CHA_GENERAL);
 }
 
 static void		srv_accept(t_env *e, int s)
@@ -76,7 +77,7 @@ static int		init_env_channel(t_env *e)
 	{
 		return (EXIT_FAILLURE);
 	}
-	if (ft_new_chanel(e->channels, "general", e->maxfd))
+	if (ft_new_chanel(e->channels, CHA_GENERAL, e->maxfd))
 	{
 		printf("%s\n", "ERROR: init_env_channel");
 	}

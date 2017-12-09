@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 13:34:01 by aollivie          #+#    #+#             */
-/*   Updated: 2017/12/07 14:19:48 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/09 16:57:02 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/time.h>
+# include <sys/resource.h>
 # include "ft_p.h"
 
 # define GUEST					"guest"
@@ -35,8 +37,11 @@
 # define WHO					"/who"
 # define MSG					"/msg"
 
+# define CHA_GENERAL			"general"
+
 # define INTERN_ERROR			"ERROR: intern error, please retry\n"
 # define WHO_NEED_CHANNEL		"ERROR: /who: must join a channel\n"
+# define NEED_CHANNEL			"ERROR: must join a channel\n"
 # define WHO_NEED_NO_ARGS		"ERROR: /who need no argument\n"
 # define BUFFER_FULL			"ERROR: buffer full\n"
 # define LEAVE_CHANNEL_NO_ARGS	"ERROR: /leave need no argument\n"
@@ -98,6 +103,7 @@ typedef struct	s_env
 
 }				t_env;
 
+int				message_channel(t_env *e, int cs, char *cmd);
 int				buf_send_error(t_buf *buf, const char *err_mess, size_t size);
 int				set_name(t_env *e, int cs, char *cmd);
 int				who(t_env *e, int cs, char *cmd);

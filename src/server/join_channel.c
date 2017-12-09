@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 00:50:42 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 12:52:24 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/09 16:08:30 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			join_channel(t_env *e, int cs, char *cmd)
 	int		ret;
 	char	*trim;
 
-	if (!(trim = ft_strtrim(cmd + ft_strlen(JOIN_CHANNEL))))
+	if (!(trim = ft_strtrim(cmd)))
 	{
 		buf_send_error(
 			e->fds[cs].buf_write, INTERN_ERROR, ft_strlen(INTERN_ERROR));

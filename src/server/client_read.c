@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:15:21 by alex              #+#    #+#             */
-/*   Updated: 2017/12/07 12:55:45 by aollivie         ###   ########.fr       */
+/*   Updated: 2017/12/09 16:40:18 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		switch_requete(t_env *e, int cs, char *command)
 	else if (!ft_strncmp(cmd, NEW_CHANNEL, ft_strlen(NEW_CHANNEL)))
 		new_channel(e, cs, cmd);
 	else if (!ft_strncmp(cmd, JOIN_CHANNEL, ft_strlen(JOIN_CHANNEL)))
-		join_channel(e, cs, cmd);
+		join_channel(e, cs, cmd + ft_strlen(JOIN_CHANNEL));
 	else if (!ft_strncmp(cmd, LEAVE_CHANNEL, ft_strlen(LEAVE_CHANNEL)))
 		leave_channel(e, cs, cmd);
 	else if (!ft_strncmp(cmd, WHO, ft_strlen(WHO)))
@@ -31,11 +31,12 @@ int		switch_requete(t_env *e, int cs, char *command)
 	else if (!ft_strncmp(cmd, MSG, ft_strlen(MSG)))
 		message(e, cs, cmd);
 	else
-	{
-		if (ft_buf_add_data(e->fds[cs].buf_write, "ERROR: unknow cmd\n",
-			ft_strlen("ERROR: unknow cmd\n")))
-			ft_buf_clean(e->fds[cs].buf_write);
-	}
+		message_channel(e, cs, cmd);
+	// {
+	// 	if (ft_buf_add_data(e->fds[cs].buf_write, "ERROR: unknow cmd\n",
+	// 		ft_strlen("ERROR: unknow cmd\n")))
+	// 		ft_buf_clean(e->fds[cs].buf_write);
+	// }
 	return (EXIT_SUCCESS);
 }
 
@@ -79,6 +80,8 @@ void	client_read(t_env *e, int cs)
 	{
 		close(cs);
 		clean_fd(&e->fds[cs]);
+		free(e->fds[cs].buf_write);
+		free(e->fds[cs].buf_read);
 		printf("client #%d gone away\n", cs);
 	}
 	else
