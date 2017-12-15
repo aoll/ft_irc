@@ -18,7 +18,10 @@ static int	init_fd_client(
 	FD_ZERO(fd_read);
 	FD_ZERO(fd_write);
 	if (sock > 0)
+	{
 		FD_SET(sock, fd_read);
+		FD_SET(sock, fd_write);
+	}
 	FD_SET(stdin, fd_read);
 	return (EXIT_SUCCESS);
 }
@@ -42,13 +45,15 @@ int			new_connection(int sock, char *buf)
 	replace_char(buf, '\t', ' ');
 	replace_char(buf, ':', ' ');
 	if (!(trim = ft_strtrim(buf)))
-		exit(EXIT_FAILURE);
+		return (listen_client(sock, STDIN));
 	if (*trim == '"' || *trim == '\'')
 		*trim = ' ';
 	if (trim[ft_strlen(trim) - 1] == '"' || trim[ft_strlen(trim) - 1] == '\'')
 		trim[ft_strlen(trim) - 1] = ' ';
 	if (!(split = ft_strsplit(trim, ' ')))
-		exit(EXIT_FAILURE);
+		return (listen_client(sock, STDIN));
+	if (!split[0] || !split[1])
+		return (listen_client(sock, STDIN));
 	ft_strcpy(addr, split[0]);
 	ft_strcpy(port, split[1]);
 	if (sock > 0)
@@ -67,21 +72,25 @@ int			listen_client(int sock, int stdin)
 	int			r;
 	char		buf[BUF_SIZE + 1];
 
-	printf("sock: %d - STDIN: %d\n", sock, stdin);
-	ft_bzero(buf, BUF_SIZE + 1);
+	// printf("sock : %d\n", sock);
 	while (42)
 	{
+		ft_bzero(buf, BUF_SIZE + 1);
 		init_fd_client(&fd_read, &fd_write, sock, stdin);
-		if (sock > 0 && ft_strlen(buf))
-			FD_SET(sock, &fd_write);
-		r = select(sock > 0 ? sock + 1 : 1 + 1, &fd_read, &fd_write, NULL, NULL);
+		// if (sock > 0 && ft_strlen(buf))
+		// 	FD_SET(sock, &fd_write);
+		r = select(sock > 0 ? sock + 1 : 2,
+			&fd_read, &fd_write, NULL, NULL);
 		if (!r)
 			continue ;
-		if (FD_ISSET(sock, &fd_read))
-			read_sock_sock(sock);
 		if (FD_ISSET(stdin, &fd_read))
 			if (read_sock_stdin(stdin, buf) == 2)
 				return (new_connection(sock, buf + 8));
+		if (sock <= 0)
+			continue ;
+		// printf("buf :%s\n", buf);
+		if (FD_ISSET(sock, &fd_read))
+				read_sock_sock(sock);
 		if (FD_ISSET(sock, &fd_write) && ft_strlen(buf))
 			write_sock(sock, buf, ft_strlen(buf));
 	}
