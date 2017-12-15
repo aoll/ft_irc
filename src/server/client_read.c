@@ -17,7 +17,7 @@ int		switch_requete(t_env *e, int cs, char *command)
 	char *cmd;
 
 	if (!(cmd = ft_strtrim(command)))
-		exit(EXIT_FAILLURE);
+		return (EXIT_FAILLURE);
 	if (!ft_strncmp(cmd, NICKNAME, ft_strlen(NICKNAME)))
 		set_name(e, cs, cmd);
 	else if (!ft_strncmp(cmd, NEW_CHANNEL, ft_strlen(NEW_CHANNEL)))
@@ -32,11 +32,6 @@ int		switch_requete(t_env *e, int cs, char *command)
 		message(e, cs, cmd);
 	else
 		message_channel(e, cs, cmd);
-	// {
-	// 	if (ft_buf_add_data(e->fds[cs].buf_write, "ERROR: unknow cmd\n",
-	// 		ft_strlen("ERROR: unknow cmd\n")))
-	// 		ft_buf_clean(e->fds[cs].buf_write);
-	// }
 	return (EXIT_SUCCESS);
 }
 
@@ -45,7 +40,6 @@ void	recv_data(t_env *e, int cs, char *buf, int r)
 	char	data[BUF_SIZE + 1];
 	int		buf_size;
 
-	printf("BUF: %s\n", buf);
 	ft_bzero(data, BUF_SIZE + 1);
 	if (ft_buf_add_data(e->fds[cs].buf_read, buf, r))
 	{
@@ -63,7 +57,6 @@ void	recv_data(t_env *e, int cs, char *buf, int r)
 			printf("%s\n", "ERROR: too much data");
 			return ;
 		}
-		printf("buf_size: %d\n", buf_size);
 		switch_requete(e, cs, data);
 	}
 	return ;

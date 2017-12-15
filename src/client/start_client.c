@@ -41,27 +41,23 @@ int			new_connection(int sock, char *buf)
 	char	**split;
 	char	*trim;
 
-	printf("%s\n", "hello new connection");
 	replace_char(buf, '\t', ' ');
 	replace_char(buf, ':', ' ');
 	if (!(trim = ft_strtrim(buf)))
-		return (listen_client(sock, STDIN));
+		return (sock > 0 ? listen_client(sock, STDIN) : EXIT_FAILURE);
 	if (*trim == '"' || *trim == '\'')
 		*trim = ' ';
 	if (trim[ft_strlen(trim) - 1] == '"' || trim[ft_strlen(trim) - 1] == '\'')
 		trim[ft_strlen(trim) - 1] = ' ';
 	if (!(split = ft_strsplit(trim, ' ')))
-		return (listen_client(sock, STDIN));
+		return (sock > 0 ? listen_client(sock, STDIN) : EXIT_FAILURE);
 	if (!split[0] || !split[1])
-		return (listen_client(sock, STDIN));
+		return (sock > 0 ? listen_client(sock, STDIN) : EXIT_FAILURE);
 	ft_strcpy(addr, split[0]);
 	ft_strcpy(port, split[1]);
 	if (sock > 0)
-	{
 		close(sock);
-	}
 	ft_array_free(&split);
-	printf("%s\n", "before start client");
 	return (start_client(addr, port));
 }
 
@@ -72,13 +68,10 @@ int			listen_client(int sock, int stdin)
 	int			r;
 	char		buf[BUF_SIZE + 1];
 
-	// printf("sock : %d\n", sock);
 	while (42)
 	{
 		ft_bzero(buf, BUF_SIZE + 1);
 		init_fd_client(&fd_read, &fd_write, sock, stdin);
-		// if (sock > 0 && ft_strlen(buf))
-		// 	FD_SET(sock, &fd_write);
 		r = select(sock > 0 ? sock + 1 : 2,
 			&fd_read, &fd_write, NULL, NULL);
 		if (!r)
@@ -88,7 +81,6 @@ int			listen_client(int sock, int stdin)
 				return (new_connection(sock, buf + 8));
 		if (sock <= 0)
 			continue ;
-		// printf("buf :%s\n", buf);
 		if (FD_ISSET(sock, &fd_read))
 				read_sock_sock(sock);
 		if (FD_ISSET(sock, &fd_write) && ft_strlen(buf))

@@ -12,16 +12,16 @@
 
 #include "client.h"
 
-// static void	usage(const char *name)
-// {
-// 	printf("Usage %s <machine> <port> || [machine [port]]\n", name);
-// 	return ;
-// }
+static void	usage(const char *name)
+{
+	printf("Usage %s <machine> <port> || [machine [port]]\n", name);
+	exit(EXIT_SUCCESS);
+}
 
 int			main(int ac, char **av)
 {
-	// if (ac < 2 || ac > 3)
-	// 	usage(av[0]);
+	if (ac > 3)
+		usage(av[0]);
 	if (ac == 1)
 		return (listen_client(-1, STDIN));
 	if (av[2])
