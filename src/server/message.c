@@ -63,7 +63,6 @@ static int	send_dada(t_env *e, int cs, char *buf, char *target_name)
 		if ((e->fds[i].type == FD_CLIENT) &&
 			(i != cs) && !ft_strcmp(e->fds[i].name, target_name))
 		{
-
 			return (write_data(e, cs, buf, i));
 		}
 	}

@@ -82,7 +82,7 @@ int			listen_client(int sock, int stdin)
 		if (sock <= 0)
 			continue ;
 		if (FD_ISSET(sock, &fd_read))
-				read_sock_sock(sock);
+			read_sock_sock(sock);
 		if (FD_ISSET(sock, &fd_write) && ft_strlen(buf))
 			write_sock(sock, buf, ft_strlen(buf));
 	}
